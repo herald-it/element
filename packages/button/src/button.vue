@@ -1,19 +1,18 @@
 <template>
-  <button :disabled="disabled" class="el-button"
+  <button :disabled="disabled" class="btn"
     @click="handleClick"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'el-button--' + type : '',
+      type ? 'btn-' + type : '',
       size ? 'el-button--' + size : '',
+      loading ? 'spinner spinner-default spinner-sm' : '',
       {
         'is-disabled': disabled,
-        'is-loading': loading,
         'is-plain': plain
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
     <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
     <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>

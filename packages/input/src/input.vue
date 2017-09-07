@@ -3,17 +3,14 @@
     type === 'textarea' ? 'el-textarea' : 'el-input',
     size ? 'el-input--' + size : '',
     {
-      'is-disabled': disabled,
-      'el-input-group': $slots.prepend || $slots.append,
-      'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend
+      'input-group': $slots.prepend || $slots.append,
     }
   ]">
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
+      <span class="input-group-addon" v-if="$slots.prepend">
         <slot name="prepend"></slot>
-      </div>
+      </span>
       <!-- input 图标 -->
       <slot name="icon">
         <i class="el-input__icon"
@@ -27,7 +24,7 @@
       </slot>
       <input
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        class="form-control"
         v-bind="$props"
         :autocomplete="autoComplete"
         :value="currentValue"
@@ -38,13 +35,13 @@
       >
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
+      <span class="input-group-addon" v-if="$slots.append">
         <slot name="append"></slot>
-      </div>
+      </span>
     </template>
     <textarea
       v-else
-      class="el-textarea__inner"
+      class="form-control"
       :value="currentValue"
       @input="handleInput"
       ref="textarea"
